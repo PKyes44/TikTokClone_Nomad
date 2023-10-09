@@ -111,6 +111,7 @@ class _EmailScreenState extends State<EmailScreen> {
                 onTap: onSubmit,
                 child: FormButton(
                   disabled: _email.isEmpty || isEmailValid() != null,
+                  text: "Next",
                 ),
               ),
             ],

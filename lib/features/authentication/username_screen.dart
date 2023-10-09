@@ -103,6 +103,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
                 onTap: () => onEmailTap(),
                 child: FormButton(
                   disabled: _username.isEmpty,
+                  text: "Next",
                 ),
               ),
             ],

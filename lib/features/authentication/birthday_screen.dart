@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
-import 'package:tiktok_clone/features/onboarding/interestsScreen.dart';
+import 'package:tiktok_clone/features/onboarding/interests_screen.dart';
 
 class BirthdayScreen extends StatefulWidget {
   const BirthdayScreen({super.key});
@@ -108,6 +108,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
                 onTap: onSubmit,
                 child: const FormButton(
                   disabled: false,
+                  text: "Next",
                 ),
               ),
             ],
