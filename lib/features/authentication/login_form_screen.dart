@@ -12,50 +12,76 @@ class LoginFormScreen extends StatefulWidget {
 class _LoginFormScreenState extends State<LoginFormScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  Map<String, String> memberData = {};
+
   void onSubmitTap() {
-    formKey.currentState?.validate();
+    if (formKey.currentState != null) {
+      if (formKey.currentState!.validate()) {
+        formKey.currentState!.save();
+      }
+    }
+  }
+
+  void onScaffoldTap() {
+    FocusScope.of(context).unfocus();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Log in"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Sizes.size36,
+    return GestureDetector(
+      onTap: onScaffoldTap,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Log in"),
+          centerTitle: true,
         ),
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: "Email",
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Sizes.size36,
+          ),
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  onSaved: (newValue) {
+                    if (newValue != null) {
+                      memberData['email'] = newValue;
+                    }
+                  },
+                  decoration: const InputDecoration(
+                    hintText: "Email",
+                  ),
+                  validator: (value) {
+                    // return "Email format is incorrect";
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  return "Email format is incorrect";
-                },
-              ),
-              Gaps.v16,
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: "Password",
+                Gaps.v16,
+                TextFormField(
+                  onSaved: (newValue) {
+                    if (newValue != null) {
+                      memberData['password'] = newValue;
+                    }
+                  },
+                  decoration: const InputDecoration(
+                    hintText: "Password",
+                  ),
+                  validator: (value) {
+                    // return "Wrong password";
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  return "Wrong password";
-                },
-              ),
-              Gaps.v28,
-              GestureDetector(
-                onTap: onSubmitTap,
-                child: const FormButton(
-                  disabled: false,
-                  text: "Log in",
+                Gaps.v28,
+                GestureDetector(
+                  onTap: onSubmitTap,
+                  child: const FormButton(
+                    disabled: false,
+                    text: "Log in",
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
